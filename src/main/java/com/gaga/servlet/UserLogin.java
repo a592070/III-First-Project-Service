@@ -24,36 +24,31 @@ public class UserLogin extends HttpServlet {
         resp.setContentType("application/json; charset=utf-8");
         PrintWriter writer = resp.getWriter();
 
-        String username = String.valueOf(req.getHeader("username"));
-        String password = String.valueOf(req.getHeader("password"));
-        String reqType = String.valueOf(req.getHeader("reqType"));
+        String username = String.valueOf(req.getParameter("username"));
+        String password = String.valueOf(req.getParameter("password"));
+        String reqType = String.valueOf(req.getParameter("reqType"));
 
         boolean login = false;
+        String result = "null";
         try {
 
             if(Objects.equals(reqType, "login")) {
-
                 login = new LoginService(username, password).login();
-                String jsonData = JsonUtil.sendJsonData(login, null, null, 0);
-                writer.write(jsonData);
+                result = JsonUtil.sendJsonData(login, null, null, 0);
 
             }else if(Objects.equals(reqType, "register")){
-
                 boolean register = new LoginService(username, password).register();
-                String jsonData = JsonUtil.sendJsonData(register, null, null, 0);
-                writer.write(jsonData);
+                result = JsonUtil.sendJsonData(register, null, null, 0);
 
             }else if(Objects.equals(reqType, "isRegister")){
-
                 boolean isRegister = new LoginService(username, password).isRegistered();
-                String jsonData = JsonUtil.sendJsonData(isRegister, null, null, 0);
-                writer.write(jsonData);
+                result = JsonUtil.sendJsonData(isRegister, null, null, 0);
 
             }
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        writer.write(result);
 
     }
 

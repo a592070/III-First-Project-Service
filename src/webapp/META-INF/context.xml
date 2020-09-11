@@ -3,14 +3,15 @@
     <WatchedResource>WEB-INF/web.xml</WatchedResource>
 
     <Resource  name="com.gaga.jdbc.connections.DBConnectionPool"
+               url="jdbc:oracle:thin:@//localhost:1521/XEPDB1"
+               driverClassName="oracle.jdbc.OracleDriver"
                username="iiidba"
                password="iiidba"
-               driverClassName="oracle.jdbc.OracleDriver"
-               url="jdbc:oracle:thin:@//localhost:1521/XEPDB1"
                auth="Container"
                type="javax.sql.DataSource"
                MaxTotal="10"
                maxIdle="8"
                maxWaitMillis="10000"
-               initialSize="1"/>
+               initialSize="1"
+               defaultAutoCommit="false"/>
 </Context>

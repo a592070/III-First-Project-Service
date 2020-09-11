@@ -6,6 +6,7 @@ import com.gaga.jdbc.dao.insert.StockInsert;
 import com.gaga.jdbc.dao.query.StockQuery;
 import com.gaga.jdbc.pojo.StockDayDO;
 import com.gaga.jdbc.pojo.StockTotalNoDO;
+import com.gaga.utils.StringUtil;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -115,7 +116,10 @@ public class StockService {
     public boolean updateData(String sDate) throws IOException, NoSuchAlgorithmException, SQLException, KeyManagementException {
         if(sDate != null) sDate = sDate.replace("-", "");
 
-        boolean b = new StockInsert(stock).insert(sDate);
+        boolean b = false;
+
+        b = new StockInsert(stock).insert(sDate);
+
         updateList();
         return b;
     }

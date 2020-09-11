@@ -34,6 +34,14 @@
         <servlet-name>AllStockData</servlet-name>
         <url-pattern>/AllStockData</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>InsertData</servlet-name>
+        <servlet-class>com.gaga.servlet.InsertData</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>InsertData</servlet-name>
+        <url-pattern>/InsertData</url-pattern>
+    </servlet-mapping>
     
 
     <resource-ref>

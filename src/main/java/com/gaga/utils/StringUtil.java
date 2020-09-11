@@ -1,4 +1,4 @@
-package com.gaga.jdbc.service;
+package com.gaga.utils;
 
 public class StringUtil {
     public static boolean isEmpty(String str){

@@ -23,6 +23,8 @@ public class AllStockInfo extends HttpServlet {
         PrintWriter writer = resp.getWriter();
 
         String type = String.valueOf(req.getHeader("reqType"));
+
+        String result = "null";
         try {
             if(Objects.equals(type, "map")) {
                 List keys = new ArrayList();
@@ -35,16 +37,15 @@ public class AllStockInfo extends HttpServlet {
 
                 });
 
-                String s = JsonUtil.sendJsonData(true, keys, values, JsonUtil.ANALYTIC_STACKTOTALDO_MAP);
-                writer.write(s);
+                result = JsonUtil.sendJsonData(true, keys, values, JsonUtil.ANALYTIC_STACKTOTALDO_MAP);
             }else if(Objects.equals(type, "list")){
                 List<StockTotalNoDO> allStockNoList = StockService.getAllStockNoList();
-                String s = JsonUtil.sendJsonData(true, allStockNoList, allStockNoList, JsonUtil.ANALYTIC_STACKTOTALDO);
-                writer.write(s);
+                result = JsonUtil.sendJsonData(true, allStockNoList, allStockNoList, JsonUtil.ANALYTIC_STACKTOTALDO);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        writer.write(result);
 
     }
 

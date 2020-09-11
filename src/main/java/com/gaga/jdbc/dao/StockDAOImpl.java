@@ -32,12 +32,6 @@ public class StockDAOImpl implements DataBaseDAO {
     public List<StockDayDO> getLists() throws IOException, SQLException {
         return new StockQuery(stock).queryAll();
     }
-//    public List<StockDayDO> getTargetList() throws IOException, SQLException {
-//        return new StockQuery(stock).query();
-//    }
-//    public List<StockDayDO> getAllList() throws IOException, SQLException {
-//
-//    }
 
     @Override
     public StockDayDO getElement(String date) throws IOException, SQLException {
