@@ -1,11 +1,7 @@
 package com.gaga.utils;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.JSONPObject;
-import com.alibaba.fastjson.annotation.JSONPOJOBuilder;
-import com.alibaba.fastjson.serializer.JSONSerializable;
 import com.gaga.jdbc.pojo.StockDayDO;
 import com.gaga.jdbc.pojo.StockTotalNoDO;
 import com.gaga.jdbc.pojo.UserDO;
@@ -15,11 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JsonUtil {
-    public static final int ANALYTIC_USERDO = 1;
-    public static final int ANALYTIC_STACKDO = 2;
-    public static final int ANALYTIC_STACKTOTALDO = 3;
-    public static final int ANALYTIC_STACKTOTALDO_MAP = 4;
-
+    public static final int ANALYTIC_LIST_USERDO = 1;
+    public static final int ANALYTIC_LIST_STACKDO = 2;
+    public static final int ANALYTIC_LIST_STACKTOTALDO = 3;
+    public static final int ANALYTIC_MAP_STACKTOTALDO = 4;
+    
 
     public static String sendJsonData(boolean isSuccess, List field, List data, int type){
         JSONObject obj = new JSONObject();
@@ -39,9 +35,9 @@ public class JsonUtil {
         return obj.toJSONString();
     }
 
-    public static List<String> analyListField(List list , int type){
+    private static List<String> analyListField(List list , int type){
         switch (type){
-            case JsonUtil.ANALYTIC_STACKTOTALDO_MAP:
+            case JsonUtil.ANALYTIC_MAP_STACKTOTALDO:
                 return list;
             default:
                 return analyListField1(list);
@@ -60,19 +56,19 @@ public class JsonUtil {
     }
 
 
-    public static List<String> analyListData(List list , int type){
+    private static List<String> analyListData(List list , int type){
         List<String> dataList = new ArrayList<>();
         switch (type){
-            case ANALYTIC_USERDO:
+            case ANALYTIC_LIST_USERDO:
                 dataList = analyListData1(list);
                 break;
-            case ANALYTIC_STACKDO:
+            case ANALYTIC_LIST_STACKDO:
                 dataList = analyListData2(list);
                 break;
-            case ANALYTIC_STACKTOTALDO:
+            case ANALYTIC_LIST_STACKTOTALDO:
                 dataList = analyListData3(list);
                 break;
-            case ANALYTIC_STACKTOTALDO_MAP:
+            case ANALYTIC_MAP_STACKTOTALDO:
                 dataList = analyListData4(list);
                 break;
         }
@@ -109,5 +105,13 @@ public class JsonUtil {
             dataList.add(arr);
         }
         return dataList;
+    }
+    
+    public static String analyUserDO(boolean isSuccess, UserDO user){
+        JSONObject obj = new JSONObject();
+        obj.put("isSuccess", isSuccess);
+        obj.put("field", "null");
+        obj.put("data", user.toJsonArray());
+        return obj.toJSONString();
     }
 }

@@ -25,7 +25,7 @@ public class AllStockData extends HttpServlet {
         String result = "null";
         try {
             List<StockDayDO> list = StockService.getList();
-            result = JsonUtil.sendJsonData(true, list, list, JsonUtil.ANALYTIC_STACKDO);
+            result = JsonUtil.sendJsonData(true, list, list, JsonUtil.ANALYTIC_LIST_STACKDO);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

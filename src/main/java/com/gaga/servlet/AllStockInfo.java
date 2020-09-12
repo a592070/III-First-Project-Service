@@ -5,7 +5,6 @@ import com.gaga.jdbc.service.StockService;
 import com.gaga.utils.JsonUtil;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,10 +36,10 @@ public class AllStockInfo extends HttpServlet {
 
                 });
 
-                result = JsonUtil.sendJsonData(true, keys, values, JsonUtil.ANALYTIC_STACKTOTALDO_MAP);
+                result = JsonUtil.sendJsonData(true, keys, values, JsonUtil.ANALYTIC_MAP_STACKTOTALDO);
             }else if(Objects.equals(type, "list")){
                 List<StockTotalNoDO> allStockNoList = StockService.getAllStockNoList();
-                result = JsonUtil.sendJsonData(true, allStockNoList, allStockNoList, JsonUtil.ANALYTIC_STACKTOTALDO);
+                result = JsonUtil.sendJsonData(true, allStockNoList, allStockNoList, JsonUtil.ANALYTIC_LIST_STACKTOTALDO);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

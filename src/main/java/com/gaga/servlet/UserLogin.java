@@ -31,17 +31,20 @@ public class UserLogin extends HttpServlet {
         boolean login = false;
         String result = "null";
         try {
-
+            LoginService service = new LoginService(username, password);
             if(Objects.equals(reqType, "login")) {
-                login = new LoginService(username, password).login();
-                result = JsonUtil.sendJsonData(login, null, null, 0);
+                login = service.login();
+                UserDO userDO = new UserDO();
+                if(login) userDO = service.getUser();
+
+                result = JsonUtil.analyUserDO(login, userDO);
 
             }else if(Objects.equals(reqType, "register")){
-                boolean register = new LoginService(username, password).register();
+                boolean register = service.register();
                 result = JsonUtil.sendJsonData(register, null, null, 0);
 
             }else if(Objects.equals(reqType, "isRegister")){
-                boolean isRegister = new LoginService(username, password).isRegistered();
+                boolean isRegister = service.isRegistered();
                 result = JsonUtil.sendJsonData(isRegister, null, null, 0);
 
             }

@@ -34,9 +34,15 @@ public class LoginService {
 
     public boolean login(){
         for (UserDO ele : list) {
-            if(userName.equals(ele.getUserName()) && password.equals(ele.getPassword())) return true;
+            if(userName.equals(ele.getUserName()) && password.equals(ele.getPassword())){
+                user = ele;
+                return true;
+            }
         }
         return false;
+    }
+    public UserDO getUser(){
+        return user;
     }
 
     public boolean isRegistered(){
